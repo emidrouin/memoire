@@ -1,0 +1,116 @@
+\documentclass[hidelinks,12pt,a4paper]{report}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}    %mettre utf8 à la place de latin si vous utilisez utf8
+\usepackage{textcomp}
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.75}
+\usepackage{sectsty}
+\allsectionsfont{\singlespacing}
+\widowpenalty=9999
+\clubpenalty=9999
+\setlength{\emergencystretch}{3em}
+\usepackage{csquotes}
+\usepackage[style=verbose-trad1,isbn=false,language=french,backend=biber]{biblatex}
+\DefineBibliographyStrings{french}{in={dans},inseries={dans}}
+\AtEveryCitekey{\clearfield{pagetotal}} %AtEveryBibitem (biblio8aphie)
+\AtEveryCitekey{\clearfield{pages}} %pages = quand chapitre d'un livre
+\AtEveryBibitem{\clearfield{pagetotal}} %pages = quand chapitre d'un livre
+\AtEveryCitekey{\clearfield{url}}
+\renewcommand*{\mkibid}{\emph}
+\DeclareNameAlias{sortname}{last-first}
+\usepackage[cyr]{aeguill}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=27.5mm,bmargin=27.5mm,lmargin=27.5mm,rmargin=27.5mm}
+\usepackage{epigraph}
+\setlength\epigraphwidth{8cm}
+\usepackage{url}
+\urlstyle{same}
+\usepackage{hyperref}
+\usepackage[normalem]{ulem}
+
+\newcommand{\guil}[1]{«~{#1}~»}    %guillemets
+\newcommand{\guill}[1]{``{#1}''}     %guillemets dans les guillemets
+\addbibresource{bibliographie/memoirelatex.bib}
+\setcounter{tocdepth}{1} %(3 = jusqu'à subsubsection)
+\setcounter{secnumdepth}{1}
+\usepackage[french]{babel}
+
+\DeclareFieldFormat
+  [book,article,inbook,collection,incollection,thesis]
+  {series}{coll. \mkbibquote{#1}}
+\DeclareFieldFormat[article]{volume}{{vol.}~#1}
+
+\usepackage{titling}
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\Alph{section})}
+\renewcommand{\thesubsection}{\roman{subsection})}
+\renewcommand{\thesubsubsection}{\alph{subsubsection})}
+
+\begin{document}
+\selectlanguage{french}
+\pagenumbering{gobble} %bouffe la numérotation des pages
+
+%\input{titres/garde.tex}
+\input{titres/titre.tex}
+
+\pagenumbering{roman}
+\setcounter{page}{1}
+\input{titres/resume.tex}
+\input{titres/abstract.tex}
+
+\begin{singlespace}
+\tableofcontents
+\end{singlespace}
+\input{titres/remerciements.tex}
+\input{titres/abbrev.tex}
+\pagenumbering{gobble}
+
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\input{textes/intro.tex}
+\input{textes/chap1.tex}
+\input{textes/chap2.tex}
+\input{textes/chap3.tex}
+\input{textes/conclu.tex}
+
+
+\nocite{Carroll1979}
+\nocite{Carroll1994}
+\nocite{Charbonnier1962}
+\nocite{Pattison1978}
+\nocite{Hyatte1982}
+\nocite{Bastin2002}
+\nocite{Boivin2009}
+\nocite{Calvet1930}
+\nocite{Dupuy1931}
+\nocite{David1994}
+\nocite{Girard2008}
+\nocite{Hale1989}
+\nocite{Iche2015}
+
+\begin{singlespace}
+\addcontentsline{toc}{chapter}{Bibliographie}
+\setlength\bibitemsep{1.5\itemsep}
+
+
+\defbibheading{subbibliography}[\refname]{\subsection*{#1}}
+\defbibheading{subsubbibliography}[\refname]{\subsubsection*{#1}}
+
+\printbibheading
+
+\printbibheading[heading=subbibliography, title={Textes littéraires et adaptations cinématographiques}]
+\printbibliography[keyword=corpusprinc, heading=subsubbibliography, title={Corpus principal}]
+\printbibliography[keyword=corpussec, heading=subsubbibliography, title={Corpus secondaire}]
+
+\printbibheading[heading=subbibliography, title={Théorie littéraire}]
+\printbibliography[keyword=perso, heading=subsubbibliography, title={Typologie du personnage}]
+\printbibliography[keyword=langage, heading=subsubbibliography, title={Linguistique et ludisme langagier}]
+\printbibliography[keyword=enfant, heading=subsubbibliography, title={Représentations de l'enfance en littérature}]
+
+\printbibheading[heading=subbibliography, title={Ouvrages critiques, articles et entrevues}]
+\printbibliography[keyword=alice, heading=subsubbibliography, title={Sur les actualisations d'Alice dans la littérature française}]
+\printbibliography[keyword=queneau, heading=subsubbibliography, title={Sur \textit{Zazie dans le métro} et l'écriture de Raymond Queneau}]
+\printbibliography[keyword=labreche, heading=subsubbibliography, title={Sur \textit{Borderline} et l'écriture de Marie-Sissi Labrèche}]
+
+\end{singlespace}
+\end{document}
